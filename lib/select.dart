@@ -68,25 +68,6 @@ class _myHomePageState extends State<Select> {
     }
   }*/
   
-  Widget form(){
-    return Form(
-      child: Padding(
-        padding: EdgeInsets.all(20),
-        child: new Column(
-          children: <Widget>[
-            TextFormField(
-              controller: controller_busqueda,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'Busqueda por matricula'),
-              validator: (val) => val.length == 0 ? 'Enter Data' : null,
-              onSaved: (val) => matricula = val,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
 //SHOW DATA
   SingleChildScrollView dataTable(List<Student> Studentss) {
     return SingleChildScrollView(
@@ -205,7 +186,7 @@ class _myHomePageState extends State<Select> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            form(),
+            //form(),
             list(),
           ],
         ),
