@@ -163,7 +163,6 @@ class _myHomePageState extends State<homePage> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.add_to_photos, color: Colors.red),
                 title: Text("Insert",
                 style: TextStyle(
                   color: Colors.black,
@@ -178,7 +177,6 @@ class _myHomePageState extends State<homePage> {
                       ));
                 },),
               ListTile(
-                leading: Icon(Icons.update, color: Colors.blue[700]),
                 title: Text("Update",
                 style: TextStyle(
                   color: Colors.black,
@@ -192,7 +190,6 @@ class _myHomePageState extends State<homePage> {
                       ));
                 },),
               ListTile(
-                leading: Icon(Icons.delete_forever, color: Colors.green[700]),
                 title: Text("Delete",
                 style: TextStyle(
                   color: Colors.black,
@@ -207,7 +204,6 @@ class _myHomePageState extends State<homePage> {
                       ));
                 },),
               ListTile(
-                leading: Icon(Icons.youtube_searched_for, color: Colors.yellow[700]),
                 title: Text("Select",
                 style: TextStyle(
                   color: Colors.black,
@@ -226,7 +222,7 @@ class _myHomePageState extends State<homePage> {
         ),
         appBar: new AppBar(
           title: Text("FLUTTER BASIC SQL OPERATIONS"),
-          backgroundColor: Colors.blueGrey[800],
+          backgroundColor: Colors.black,
           centerTitle: true,
         ),
         body: new Container(
