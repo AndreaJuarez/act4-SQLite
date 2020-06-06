@@ -154,15 +154,17 @@ class _myHomePageState extends State<homePage> {
                         fit: BoxFit.cover
                     )
                 ),
-                child: Text("SELECCIONE UNA OPCIÓN:",
+                padding: EdgeInsets.all(60),
+                child: Text("   OPERACIONES:",
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white
+                  color: Colors.black
                   ),
                 ),
               ),
               ListTile(
+                leading: Icon(Icons.add_to_photos, color: Colors.blue[800]),
                 title: Text("Insert",
                 style: TextStyle(
                   color: Colors.black,
@@ -177,6 +179,7 @@ class _myHomePageState extends State<homePage> {
                       ));
                 },),
               ListTile(
+                leading: Icon(Icons.update, color: Colors.blue[400]),
                 title: Text("Update",
                 style: TextStyle(
                   color: Colors.black,
@@ -190,6 +193,7 @@ class _myHomePageState extends State<homePage> {
                       ));
                 },),
               ListTile(
+                leading: Icon(Icons.delete_forever, color: Colors.cyan[800]),
                 title: Text("Delete",
                 style: TextStyle(
                   color: Colors.black,
@@ -204,6 +208,7 @@ class _myHomePageState extends State<homePage> {
                       ));
                 },),
               ListTile(
+                leading: Icon(Icons.youtube_searched_for, color: Colors.cyan[600]),
                 title: Text("Select",
                 style: TextStyle(
                   color: Colors.black,
@@ -222,7 +227,7 @@ class _myHomePageState extends State<homePage> {
         ),
         appBar: new AppBar(
           title: Text("FLUTTER BASIC SQL OPERATIONS"),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.cyan[800],
           centerTitle: true,
         ),
         body: new Container(
@@ -232,15 +237,20 @@ class _myHomePageState extends State<homePage> {
                 children: <Widget>[
               list(),
                   MaterialButton(
+                    color: Colors.cyan[700],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.black),
+                      side: BorderSide(color: Colors.cyan[700]),
                     ),
                     onPressed: (){
                       refreshList();
                     },
                     //SI ESTA LLENO ACTUALIZAR, SI NO AGREGAR
-                    child: Text('Actualizar'),
+                    child: Text('Actualizar',
+                    style: TextStyle(
+                      color: Colors.white
+                      ),
+                    ),
                   ),
               ]
             )

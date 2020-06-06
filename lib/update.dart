@@ -17,6 +17,7 @@ class _myHomePageState extends State<Update> {
   TextEditingController controller_phone = TextEditingController();
   TextEditingController controller_email= TextEditingController();
   TextEditingController controller_matricula = TextEditingController();
+  TextEditingController controller = TextEditingController();     //CONTROLER PARA CAMPO A ACTUALIZAR
 
   String name;
   String lastname1;
@@ -58,6 +59,7 @@ class _myHomePageState extends State<Update> {
     controller_phone.text = "";
     controller_email.text = "";
     controller_matricula.text = "";
+    controller.text = "";
   }
 
   /* void dataValidate() {
@@ -146,7 +148,7 @@ class _myHomePageState extends State<Update> {
           children: <Widget>[
             new SizedBox(height: 50.0),
             TextFormField(
-              controller: controller_name,
+              controller: controller,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(labelText: descriptive_text),
               validator: (val) => val.length == 0 ? 'Enter Data' : null,
@@ -157,18 +159,24 @@ class _myHomePageState extends State<Update> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 MaterialButton(
+                  color: Colors.cyan[700],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.black),
+                    side: BorderSide(color: Colors.cyan[700]),
                   ),
                   onPressed: updateData,
                   //child: Text(isUpdating ? 'Update ' : 'Add Data'),
-                  child: Text('Update Data'),
+                  child: Text('Update Data',
+                  style: TextStyle(
+                    color: Colors.white
+                    ),
+                  ),
                 ),
                 MaterialButton(
+                  color: Colors.cyan[700],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.black),
+                    side: BorderSide(color: Colors.cyan[700]),
                   ),
                   onPressed: () {
                     setState(() {
@@ -177,7 +185,11 @@ class _myHomePageState extends State<Update> {
                     cleanData();
                     refreshList();
                   },
-                  child: Text("Cancel"),
+                  child: Text("Cancel",
+                  style: TextStyle(
+                    color: Colors.white
+                    ),
+                  ),
                 ),
               ],
             )
@@ -230,7 +242,7 @@ class _myHomePageState extends State<Update> {
                   matricula = student.matricula;
                   opcion=1;
                 });
-                controller_name.text = student.name;
+                controller.text = student.name;
               }),
               //APELLIDO PATERNO 2
               DataCell(Text(student.lastname1.toString().toUpperCase()), onTap: () {
@@ -246,7 +258,7 @@ class _myHomePageState extends State<Update> {
                   matricula = student.matricula;
                   opcion=2;
                 });
-                controller_lastname1.text= student.lastname1;
+                controller.text= student.lastname1;
               }),
               //APELLIDO MATERNO 3
               DataCell(Text(student.lastname2.toString().toUpperCase()), onTap: () {
@@ -262,7 +274,7 @@ class _myHomePageState extends State<Update> {
                   matricula = student.matricula;
                   opcion=3;
                 });
-                controller_lastname2.text= student.lastname2;
+                controller.text= student.lastname2;
               }),
               //TELEFONO 4
               DataCell(Text(student.phone.toString().toUpperCase()), onTap: () {
@@ -278,7 +290,7 @@ class _myHomePageState extends State<Update> {
                   matricula = student.matricula;
                   opcion=4;
                 });
-                controller_phone.text = student.phone;
+                controller.text = student.phone;
               }),
               //EMAIL 5
               DataCell(Text(student.email.toString().toUpperCase()), onTap: () {
@@ -294,7 +306,7 @@ class _myHomePageState extends State<Update> {
                   matricula = student.matricula;
                   opcion=5;
                 });
-                controller_email.text = student.email;
+                controller.text = student.email;
               }),
               //MATRICULA 6
               DataCell(Text(student.matricula.toString().toUpperCase()), onTap: () {
@@ -310,7 +322,7 @@ class _myHomePageState extends State<Update> {
                   matricula = student.matricula;
                   opcion=6;
                 });
-                controller_matricula.text = student.matricula;
+                controller.text = student.matricula;
               }),
 
             ])).toList(),
@@ -343,7 +355,7 @@ class _myHomePageState extends State<Update> {
       appBar: new AppBar(
         automaticallyImplyLeading: true,
         title: Text('UPDATE DATA'),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.cyan[800],
         centerTitle: true,
       ),
       body: new Container(

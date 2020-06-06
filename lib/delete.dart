@@ -43,12 +43,6 @@ class _myHomePageState extends State<Delete> {
     });
   }
 
-  void ready(){
-    setState(() {
-      _showSnackBar(context,"Datos eliminados con éxito!");
-    });
-  }
-
   void cleanData() {
     controller_name.text = "";
     controller_lastname1.text = "";
@@ -89,11 +83,17 @@ class _myHomePageState extends State<Delete> {
         rows: Studentss.map((student) => DataRow(cells: [
           //DataCell(Text(student.controlnum.toString())),
           DataCell(IconButton(
+            color: Colors.cyan[700],
             icon: Icon(Icons.delete),
             onPressed: () {
               dbHelper.delete(student.controlnum);
               refreshList();
-              ready();
+              //SNACK BAR
+              final snackBar = SnackBar(
+                backgroundColor: Colors.green,
+                content: Text('Datos eliminados correctamente!'),
+              );
+              _scaffoldKey.currentState.showSnackBar(snackBar);
             },
           )),
           DataCell(Text(student.name.toString().toUpperCase())),
@@ -133,7 +133,7 @@ class _myHomePageState extends State<Delete> {
       appBar: new AppBar(
         title: Text("DELETE DATA"),
         automaticallyImplyLeading: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.cyan[800],
         centerTitle: true,
       ),
       body: new Container(
@@ -147,12 +147,5 @@ class _myHomePageState extends State<Delete> {
         ),
       ),
     );
-  }
-  //Snackbar
-  _showSnackBar(BuildContext, String texto) {
-    final snackBar = SnackBar(
-        content: new Text(texto)
-    );
-    _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 }

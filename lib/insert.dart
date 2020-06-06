@@ -77,23 +77,24 @@ class _myHomePageState extends State<Insert> {
             Student(null, name, lastname1, lastname2, phone, email, matricula);
 
         //VALIDACION PARA REGISTRO DE DATOS
-        var validation = await dbHelper.validateInsert(stu);
+        var validation = await dbHelper.ValidarInsert(stu);
         print(validation);
         if (validation) {
           dbHelper.insert(stu);
           final snackBar = SnackBar(
-            backgroundColor: Colors.orangeAccent,
+            backgroundColor: Colors.green,
             content: Text('Datos ingresados correctamente!'),
           );
           _scaffoldKey.currentState.showSnackBar(snackBar);
           }else{
           final snackBar = SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text('Matricula en uso, intentalo de nuevo!'),
+            backgroundColor: Colors.red,
+            content: Text('Esta matricula ya existe, inténtalo de nuevo!'),
           );
           _scaffoldKey.currentState.showSnackBar(snackBar);
         }
       }
+
       //LIMPIA DESPUES DE EJECUTAR LA CONSULTA
       cleanData();
       refreshList();
@@ -144,16 +145,17 @@ class _myHomePageState extends State<Insert> {
             ),
             TextFormField(
               controller: controller_phone,
+              textCapitalization: TextCapitalization.characters, //******************* CHECAR *****************
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: "Telefono"),
-              validator: (val) => val.length == 0 ? 'Enter name' : null,
+              validator: (val) => val.length == 0 ? 'Por favor inténtelo de nuevo' : null,
               onSaved: (val) => phone = val,
             ),
             TextFormField(
               controller: controller_matricula,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: "Matricula"),
-              validator: (val) => val.length == 0 ? 'Enter name' : null,
+              validator: (val) => val.length == 0 ? 'Por favor inténtelo de nuevo' : null,
               onSaved: (val) => matricula = val,
             ),
             SizedBox(height: 30),
@@ -161,18 +163,24 @@ class _myHomePageState extends State<Insert> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 MaterialButton(
+                  color: Colors.cyan[700],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.black),
+                    side: BorderSide(color: Colors.cyan[700]),
                   ),
                   onPressed: dataValidate,
                   //SI ESTA LLENO ACTUALIZAR, SI NO AGREGAR
-                  child: Text(isUpdating ? 'Update' : 'Add Data'),
+                  child: Text(isUpdating ? 'Update' : 'Add Data',
+                  style: TextStyle(
+                    color: Colors.white
+                    ),
+                  ),
                 ),
                 MaterialButton(
+                  color: Colors.cyan[700],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.black),
+                    side: BorderSide(color: Colors.cyan[700]),
                   ),
                   onPressed: () {
                     setState(() {
@@ -180,7 +188,11 @@ class _myHomePageState extends State<Insert> {
                     });
                     cleanData();
                   },
-                  child: Text("Cancel"),
+                  child: Text("Cancel",
+                  style: TextStyle(
+                    color: Colors.white
+                    ),
+                  ),
                 ),
               ],
             )
@@ -263,7 +275,7 @@ class _myHomePageState extends State<Insert> {
         title: Text('INSERT DATA'),
         automaticallyImplyLeading: true,
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.cyan[800],
       ),
       body: new Container(
         child: new Column(

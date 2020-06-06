@@ -64,12 +64,26 @@ class DBHelper {
     return studentss;
   }
 
-  //EQUIVALENTE A SAVE O INSERT
-  Future<bool> validateInsert(Student student) async {
+  //EQUIVALENTE A SELECT LIKE
+  Future<List<Student>>Busqueda(String buscado) async{
     var dbClient = await db;
-    var code = student.matricula;
+    List<Map> maps = await dbClient.rawQuery("SELECT * FROM $TABLE WHERE $matricula LIKE '$buscado%'");
+    List<Student> studentss = [];
+    print(maps);
+    if (maps.length > 0) {
+      for (int i = 0; i < maps.length; i++) {
+        studentss.add(Student.fromMap(maps[i]));
+      }
+    }
+    return studentss;
+  }
+
+  //EQUIVALENTE A SAVE O INSERT
+  Future<bool> ValidarInsert(Student student) async {
+    var dbClient = await db;
+    var check = student.matricula;
     List<Map> maps = await dbClient
-        .rawQuery("select $Id from $TABLE where $matricula = $code");
+        .rawQuery("select $Id from $TABLE where $matricula = $check");
     if (maps.length == 0) {
       return true;
     }else{

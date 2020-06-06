@@ -24,9 +24,10 @@ class _myHomePageState extends State<Select> {
   String phone;
   String email;
   String matricula;
+  String search;
 
   int currentUserId;
-  
+
   final formkey = new GlobalKey<FormState>();
   var dbHelper;
   bool isUpdating;
@@ -39,10 +40,9 @@ class _myHomePageState extends State<Select> {
     refreshList();
   }
 
-  //select
   void refreshList() {
     setState(() {
-      Studentss = dbHelper.getStudents();
+      Studentss = dbHelper.Busqueda(controller_busqueda.text);
     });
   }
 
@@ -66,8 +66,42 @@ class _myHomePageState extends State<Select> {
       cleanData();
       refreshList();
     }
+  }
+
+
+  Widget form(){
+    return Form(
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: new Column(
+          children: <Widget>[
+            TextFormField(
+              controller: controller_busqueda,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Busqueda por matricula'),
+              validator: (val) => val.length == 0 ? 'Inserte una matricula por favor' : null,
+              onSaved: (val) => matricula = val,
+            ),
+            MaterialButton(
+              color: Colors.cyan[700],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+                side: BorderSide(color: Colors.cyan[700]),
+              ),
+              onPressed: buscarMatricula,
+              child: Text('Search',
+                style: TextStyle(
+                    color: Colors.white
+                ),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
   }*/
-  
+
 //SHOW DATA
   SingleChildScrollView dataTable(List<Student> Studentss) {
     return SingleChildScrollView(
@@ -98,57 +132,57 @@ class _myHomePageState extends State<Select> {
               //NOMBRE
               DataCell(Text(student.name.toString().toUpperCase()),
                   onTap: () {
-                  setState(() {
-                  isUpdating = true;
-                  currentUserId = student.controlnum;
-                });
-                controller_name.text = student.name;
-              }),
+                    setState(() {
+                      isUpdating = true;
+                      currentUserId = student.controlnum;
+                    });
+                    controller_name.text = student.name;
+                  }),
               //APELLIDO PATERNO
               DataCell(Text(student.lastname1.toString().toUpperCase()),
                   onTap: () {
-                  setState(() {
-                  isUpdating = true;
-                  currentUserId = student.controlnum;
-                });
-                controller_lastname1.text= student.lastname1;
-              }),
+                    setState(() {
+                      isUpdating = true;
+                      currentUserId = student.controlnum;
+                    });
+                    controller_lastname1.text= student.lastname1;
+                  }),
               //APELLIDO MATERNO
               DataCell(Text(student.lastname2.toString().toUpperCase()),
                   onTap: () {
-                  setState(() {
-                  isUpdating = true;
-                  currentUserId = student.controlnum;
-                });
-                controller_lastname2.text= student.lastname2;
-              }),
+                    setState(() {
+                      isUpdating = true;
+                      currentUserId = student.controlnum;
+                    });
+                    controller_lastname2.text= student.lastname2;
+                  }),
               //TELEFONO
               DataCell(Text(student.phone.toString().toUpperCase()),
                   onTap: () {
-                  setState(() {
-                  isUpdating = true;
-                  name = student.name;
-                });
-                controller_phone.text = student.phone;
-              }),
+                    setState(() {
+                      isUpdating = true;
+                      name = student.name;
+                    });
+                    controller_phone.text = student.phone;
+                  }),
               //EMAIL
               DataCell(Text(student.email.toString().toUpperCase()),
                   onTap: () {
-                  setState(() {
-                  isUpdating = true;
-                  currentUserId = student.controlnum;
-                });
-                controller_email.text = student.email;
-              }),
+                    setState(() {
+                      isUpdating = true;
+                      currentUserId = student.controlnum;
+                    });
+                    controller_email.text = student.email;
+                  }),
               //MATRICULA
               DataCell(Text(student.matricula.toString().toUpperCase()),
                   onTap: () {
-                  setState(() {
-                  isUpdating = true;
-                  currentUserId = student.controlnum;
-                });
-                controller_matricula.text = student.matricula;
-              }),
+                    setState(() {
+                      isUpdating = true;
+                      currentUserId = student.controlnum;
+                    });
+                    controller_matricula.text = student.matricula;
+                  }),
             ])).toList(),
       ),
     );
@@ -176,11 +210,27 @@ class _myHomePageState extends State<Select> {
 // TODO: implement build
     return new Scaffold(
       resizeToAvoidBottomInset: false,   //new line
-      appBar: new AppBar(
-        automaticallyImplyLeading: true,
-        title: Text('SELECT DATA'),
-        backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: isUpdating ? TextField(
+          autofocus: true,
+          controller: controller_busqueda,
+          onChanged: (text){
+            refreshList();
+          })
+            : Text("SELECT DATA BY MATRICULA"),
+        leading: IconButton(
+          icon: Icon(isUpdating ? Icons.done: Icons.search),
+          onPressed: () {
+            print("Is typing" + isUpdating.toString());
+            setState(() {
+              isUpdating = !isUpdating;
+              //refreshList();
+              controller_busqueda.text = "";
+            });
+          },
+        ),
         centerTitle: true,
+        backgroundColor: Colors.cyan[800],
       ),
       body: new Container(
         child: new Column(
