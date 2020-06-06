@@ -1,8 +1,8 @@
 # sqlite_act4
 
-A new Flutter application.
+A new Flutter application. Dentro de esta versión de la aplicación se encuentra el uso de SQLite en una aplicación básica de registro de datos del usuario. Así como el uso de algunas operaciones, SELECT, INSERT, DELETE y UPDATE. 
 
-![alt text](https://github.com/AndreaJuarez/act4-SQLite/blob/master/assets/inicio.jpg) 
+![alt text](https://github.com/AndreaJuarez/act4-SQLite/blob/master/assets/menu.jpg) 
 
 ## Getting Started
 
