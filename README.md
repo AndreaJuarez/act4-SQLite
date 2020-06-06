@@ -1,6 +1,7 @@
 # sqlite_act4
 
 A new Flutter application.
+assets/inicio.jpg
 
 ## Getting Started
 
